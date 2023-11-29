@@ -1,20 +1,22 @@
 import React from "react";
 import MainNav from "../components/MainNav";
-import GalleryContainer from "../components/GalleryContainer"
 import PhotoFrame from "../components/PhotoFrame";
+import PhotoContainer from "../components/PhotoContainer";
+import ViewContainer from "../components/ViewContainer";
 
 function GalleryPage() {
     return (
         <div className="GalleryPage">
             <MainNav></MainNav>
-            <GalleryContainer>
-                <PhotoFrame></PhotoFrame>
-                <PhotoFrame></PhotoFrame>
-                <PhotoFrame></PhotoFrame>
-                <PhotoFrame></PhotoFrame>
-                <PhotoFrame></PhotoFrame>
-                <PhotoFrame></PhotoFrame>
-            </GalleryContainer>
+            <ViewContainer>
+                <PhotoContainer>
+                    <PhotoFrame></PhotoFrame>
+                    <PhotoFrame></PhotoFrame>
+                    <PhotoFrame></PhotoFrame>
+                    <PhotoFrame></PhotoFrame>
+                    <PhotoFrame></PhotoFrame>
+                </PhotoContainer>
+            </ViewContainer>
         </div>
     );
 }

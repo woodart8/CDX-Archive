@@ -10,7 +10,7 @@ function PhotoFrame() {
 const Frame = styled.div`
     width: 300px;
     height: 400px;
-    background-color: blue;
+    background-color: #aaa;
 `;
 
 export default PhotoFrame;

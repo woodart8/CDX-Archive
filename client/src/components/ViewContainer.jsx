@@ -11,11 +11,9 @@ function ViewContainer({children}) {
 
 const Container = styled.div`
     display: flex;
-    box-sizing: border-box;
     position: absolute;
     top: 0;
     right: 0;
-    flex-wrap: wrap;
     height: auto;
     width: calc(100% - 336px);
     background-color: #fff;
