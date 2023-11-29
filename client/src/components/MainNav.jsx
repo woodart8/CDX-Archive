@@ -1,41 +1,38 @@
 import React from "react";
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 function MainNav() {
-
-
     return (
-        <Router>
-            <Nav>
-                <Link to="/" className="link-first">
-                    <div className="nav-main">
-                        <i className="ic-logo fa-brands fa-instagram"></i>
-                        <a className="project-name">CDX Archive</a>
-                    </div>
-                </Link>
-                <Link to="/" className="link">
-                    <div className="nav-menu">
-                        <i className="ic-home fa-solid fa-house"></i>
-                        <a className="home focus">홈</a>
-                    </div>
-                </Link>
-                <Link to="/gallery" className="link">
-                    <div className="nav-menu">
-                        <i className="ic-gallery fa-solid fa-photo-film"></i>
-                        <a className="gallery">갤러리</a>
-                    </div>
-                </Link>
-            </Nav>
-        </Router>
+        <Nav>
+            <Link to="/" className="link-first">
+                <div className="nav-main">
+                    <i className="ic-logo fa-brands fa-instagram"></i>
+                    <a className="project-name">CDX Archive</a>
+                </div>
+            </Link>
+            <Link to="/" className="link">
+                <div className="nav-menu">
+                    <i className="ic-home fa-solid fa-house"></i>
+                    <a className="home focus">홈</a>
+                </div>
+            </Link>
+            <Link to="/gallery" className="link">
+                <div className="nav-menu">
+                    <i className="ic-gallery fa-solid fa-photo-film"></i>
+                    <a className="gallery">갤러리</a>
+                </div>
+            </Link>
+        </Nav>
     );
 }
 
 const Nav = styled.nav`
     display: flex;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 335px;
+    z-index: 9999;
     background-color: #fff;
     border-right: 1px solid #e1e1e1; 
     color: #2d2d2d;
@@ -82,7 +79,7 @@ const Nav = styled.nav`
     }
 
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1360px) {
         width: 72px;
 
         a div a {
