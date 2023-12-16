@@ -1,24 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-function ViewContainer({children}) {
+function TextContainer({children}) {
     return (
-        <Container>
-            {children}
-        </Container>
+        <Container>{children}</Container>
     );
 }
 
 const Container = styled.div`
     display: flex;
     position: absolute;
-    top: 0;
-    right: 0;
-    height: auto;
+    height: 100%;
     width: calc(100% - 336px);
     background-color: #fff;
-    justify-content: center;
-    align-items: center;
 
     @media (max-width: 1360px) {
         width: calc(100% - 73px);
@@ -29,4 +23,4 @@ const Container = styled.div`
     }
 `;
 
-export default ViewContainer;
+export default TextContainer;

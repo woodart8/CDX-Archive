@@ -8,19 +8,19 @@ function MainNav() {
             <Link to="/" className="link-first">
                 <div className="nav-main">
                     <i className="ic-logo fa-brands fa-instagram"></i>
-                    <a className="project-name">CDX Archive</a>
+                    <span className="project-name">CDX Archive</span>
                 </div>
             </Link>
             <Link to="/" className="link">
                 <div className="nav-menu">
                     <i className="ic-home fa-solid fa-house"></i>
-                    <a className="home focus">홈</a>
+                    <span className="home focus">홈</span>
                 </div>
             </Link>
             <Link to="/gallery" className="link">
                 <div className="nav-menu">
                     <i className="ic-gallery fa-solid fa-photo-film"></i>
-                    <a className="gallery">갤러리</a>
+                    <span className="gallery">갤러리</span>
                 </div>
             </Link>
         </Nav>
@@ -82,7 +82,7 @@ const Nav = styled.nav`
     @media (max-width: 1360px) {
         width: 72px;
 
-        a div a {
+        a div span {
             display: none;
         }
 

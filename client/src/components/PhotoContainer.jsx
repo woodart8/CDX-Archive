@@ -25,6 +25,7 @@ const Container = styled.div`
 
     @media (max-width: 767px) {
         grid-template-columns: repeat(1,1fr);
+        padding-bottom: 85px;
     }
 `;
 
