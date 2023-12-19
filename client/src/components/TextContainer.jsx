@@ -9,8 +9,8 @@ function TextContainer({children}) {
 
 const Container = styled.div`
     display: flex;
-    position: absolute;
-    height: 100%;
+    position: relative;
+    height: 100vh;
     width: calc(100% - 336px);
     background-color: #fff;
 

@@ -52,7 +52,8 @@ const Txt = styled.div`
     }
 
     .top-color{
-      color: #c3c5f1;
+      color: #747AFD;
+      opacity: 0.4;
     }
 
     .bottom-color{

@@ -102,7 +102,7 @@ const Nav = styled.nav`
     }
 
     @media (max-width: 767px) {
-        bottom: 0;
+        bottom: 0px;
         height: 50px;
         width: 100%;
         border-top: 1px solid #e1e1e1;

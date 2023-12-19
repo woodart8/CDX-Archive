@@ -9,7 +9,8 @@ function PhotoFrame() {
 
 const Frame = styled.div`
     width: 300px;
-    height: 400px;
+    height: 300px;
+    border-radius: 10px;
     background-color: #aaa;
 `;
 
