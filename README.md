@@ -1,6 +1,6 @@
-# CDX ARCHIVE
+# CDX ARCHIVE(친구들과의 추억 여행)
 
-친구들과의 사진 저장소
+**개발 기간** : 23.11.28 ~
 
 - FrontEnd: ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white)
 
