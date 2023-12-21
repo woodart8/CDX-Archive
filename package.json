@@ -6,6 +6,7 @@
         "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\""
     },
     "dependencies": {
-        "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2",
+        "multer-s3": "^3.0.1"
     }
 }

@@ -48,14 +48,14 @@ function UploadPhoto() {
     return (
         <Container>
             <form onSubmit={onSubmitHandler}>
-            <div className="upload-photo-frame">
-                <img width={'100%'} src={photoSrc} alt=""/>
-            </div>
-            <label htmlFor="uploadPhoto">
-                <div className="btn-upload">선택</div>
-            </label>
-            <input type="file" name="file" id="uploadPhoto" accept="image/*" ref={inputRef} onChange={onUploadPhoto}/>
-            <button className="btn-confirm" type="submit">확인</button>
+                <div className="upload-photo-frame">
+                    <img height={'100%'} width={'100%'} src={photoSrc} alt=""/>
+                </div>
+                <label htmlFor="uploadPhoto">
+                    <div className="btn-upload">선택</div>
+                </label>
+                <input type="file" name="file" id="uploadPhoto" accept="image/*" ref={inputRef} onChange={onUploadPhoto}/>
+                <button className="btn-confirm" type="submit">확인</button>
             </form>
         </Container>
     );
