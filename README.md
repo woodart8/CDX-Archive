@@ -1,6 +1,6 @@
 # CDX ARCHIVE(친구들과의 추억 저장소)
 
-**사이트**: [CDX Archive](http://cdxarchive.com)
+**사이트**: [http://cdxarchive.com](http://cdxarchive.com)
 
 **개발 기간** : 23.11.28 ~ 23.12.27
 
