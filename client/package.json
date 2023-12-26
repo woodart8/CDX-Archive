@@ -43,8 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://woodart8.github.io/CDX-Archive",
-  "devDependencies": {
-    "gh-pages": "^6.1.1"
-  }
+  "homepage": "http://woodart8.github.io/CDX-Archive"
 }
