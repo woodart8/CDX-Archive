@@ -10,8 +10,6 @@ function UploadPhoto() {
         const file = e.target.files[0];
         const reader = new FileReader();
 
-        console.log(e.target.files[0].name);
-
         try {
           reader.readAsDataURL(file);
         } catch (error) {

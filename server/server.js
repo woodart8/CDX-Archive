@@ -10,18 +10,31 @@ const ObjectId = require('mongodb').ObjectId;
 mongoDB();
 dotenv.config();
 
-app.use(cors({
-    origin : 'http://localhost:3000',
-    methods : ['GET','POST','DELETE'],
-    credentials : true,
-}));
+app.use(cors());
 
 app.use(express.json());
 
 app.get("/gallery", async(req, res) => {
     try{
-        const list = await Photo.find({});
-        return res.status(200).send({list})
+        let pageSize = req.query.pageSize;
+        let pageNo = req.query.pageNo;
+
+        if(pageSize == undefined || typeof pageSize == "undefined" || pageSize == null){
+            pageSize = 16;
+        } else {
+            pageSize = parseInt(pageSize);
+        }
+        if(pageNo == undefined || typeof pageNo == "undefined" || pageNo == null){
+            pageNo = 1;
+        } else {
+            pageNo = parseInt(pageNo);
+        }
+
+        const total = await Photo.countDocuments();
+        const list = await Photo.find()
+            .skip(pageSize * (pageNo - 1))
+            .limit(pageSize);
+        return res.status(200).send({total, list})
     } catch(err){
         return res.status(500).send({ err : err.message });
     }
