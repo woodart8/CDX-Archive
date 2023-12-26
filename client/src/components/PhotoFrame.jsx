@@ -10,7 +10,7 @@ function PhotoFrame({children}) {
     }
 
     const handleDelete = () => {
-        axios.delete(`http://43.202.52.215:5000/delete/${children.props.id}`)
+        axios.delete(`https://43.202.52.215:5000/delete/${children.props.id}`)
         .then(res => {
             console.log(res);
         }).catch(err => {

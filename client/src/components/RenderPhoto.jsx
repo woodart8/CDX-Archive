@@ -13,7 +13,7 @@ function RenderPhoto() {
     });
 
     const photoFetch = useCallback(async () => {
-        await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12`)
+        await axios.get(`https://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12`)
         .then((res) => {
             setPhotoList([...photoList, ...res.data.list]);
             setPage((page) => page + 1);
