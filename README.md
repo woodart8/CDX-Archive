@@ -13,4 +13,4 @@
 - Storage: ![Amazon_S3](https://img.shields.io/badge/Amazon_S3-569A31?style=flat&logo=amazons3&logoColor=white)
 
 ---
-Site Url: [CDX Archive](http://cdxarchive.s3-website.ap-northeast-2.amazonaws.com)
+Site Url: [CDX Archive](http://cdxarchive.com.s3-website.ap-northeast-2.amazonaws.com)
