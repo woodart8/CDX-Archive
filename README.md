@@ -15,3 +15,9 @@
 - Deployment: ![Amazon_S3](https://img.shields.io/badge/Amazon_S3-569A31?style=flat&logo=amazons3&logoColor=white) ![Amazon Route 53](https://img.shields.io/badge/Route_53-8C4FFF?style=flat&logo=amazonroute53&logoColor=white) 
 
 ---
+
+Desktop:
+Upload ( O ), Delete ( O )
+
+Mobile:
+Upload ( O ), Delete ( X ) //Axios Network Error 원인을 잘 모르겠음.
