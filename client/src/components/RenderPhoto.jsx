@@ -53,7 +53,7 @@ function RenderPhoto() {
         }).catch(err => {
             console.log(err);
         })
-        window.location.reload(true);
+        setTimeout(() => {window.location.reload(true);}, 500);
     }
 
     return (
