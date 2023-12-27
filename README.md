@@ -1,6 +1,8 @@
 # CDX ARCHIVE(친구들과의 추억 저장소)
 
-**개발 기간** : 23.11.28 ~
+**사이트**: [CDX Archive](http://cdxarchive.com)
+
+**개발 기간** : 23.11.28 ~ 23.12.27
 
 **개발 인원** : 1인
 
@@ -10,7 +12,12 @@
 
 - DB: ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)
 
-- Storage: ![Amazon_S3](https://img.shields.io/badge/Amazon_S3-569A31?style=flat&logo=amazons3&logoColor=white)
+- Deployment: ![Amazon_S3](https://img.shields.io/badge/Amazon_S3-569A31?style=flat&logo=amazons3&logoColor=white) ![Amazon Route 53](https://img.shields.io/badge/Route_53-8C4FFF?style=flat&logo=amazonroute53&logoColor=white) 
 
 ---
-Site Url: [CDX Archive](http://cdxarchive.s3-website.ap-northeast-2.amazonaws.com)
+
+Desktop:
+Upload ( O ), Delete ( O )
+
+Mobile:
+Upload ( O ), Delete ( X ) //Axios Network Error 원인을 잘 모르겠음. Safari에서는 Delete 작동
