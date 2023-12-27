@@ -47,7 +47,7 @@ function UploadPhoto() {
         <Container>
             <form onSubmit={onSubmitHandler}>
                 <div className="upload-photo-frame">
-                    <img height={'100%'} width={'100%'} src={photoSrc} alt=""/>
+                    <img style={{height: "100%", width: "100%", objectFit: "cover"}} src={photoSrc} alt=""/>
                 </div>
                 <label htmlFor="uploadPhoto">
                     <div className="btn-upload">선택</div>
