@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components"
 
-function FullSizePhotoFrame({children}) {
+function FullSizePhotoFrame({children}){
     return (
         <Frame>
             {children}
@@ -11,23 +11,11 @@ function FullSizePhotoFrame({children}) {
 
 const Frame = styled.div`
     display: flex;
-    height: auto;
-    width: 580px;
+    height: 90%;
+    width: 90%;
     z-index: 3;
     justify-content: center;
-    align-iterms: center;
-
-    @media (max-width: 1360px) {
-        width: 500px;
-    }
-
-    @media (max-width: 767px) {
-        width: 320px;
-    }
-
-    img {
-        width: 100%;
-    }
+    align-items: center;
 `;
 
 export default FullSizePhotoFrame;

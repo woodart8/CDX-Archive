@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PhotoFrame from "./PhotoFrame";
 import PhotoContainer from "./PhotoContainer";
-import FullSizeView from "./FullSizeView";
+import FullSizeViewModal from "./FullSizeViewModal";
 import axios from "axios";
 import { useInView } from 'react-intersection-observer';
 import FullSizePhotoFrame from "./FullSizePhotoFrame";
@@ -60,15 +60,15 @@ function RenderPhoto() {
         <div>
             {
                 visible && 
-                <FullSizeView>
+                <FullSizeViewModal>
                     <FullSizePhotoFrame>
-                        <img id={fullSizePhotoId} src={fullSizePhotoUrl} alt=""></img>
+                        <img id={fullSizePhotoId} src={fullSizePhotoUrl} alt="" style={{height: '100%', width: '100%', objectFit: 'contain'}}></img>
                     </FullSizePhotoFrame>
                     <TextButtonContainer>
                         <TextButton><span onClick={handleDelete}>삭제</span></TextButton>
                         <TextButton><span onClick={() => handleClick()}>확인</span></TextButton>
                     </TextButtonContainer>
-                </FullSizeView>
+                </FullSizeViewModal>
             }
             <PhotoContainer>
                 {

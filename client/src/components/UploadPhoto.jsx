@@ -6,7 +6,7 @@ function UploadPhoto() {
     const [photoSrc, setPhotoSrc] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
     const inputRef = useRef(null);
 
-    const onUploadPhoto = useCallback(async e => {
+    const handleChange = useCallback(async e => {
         const file = e.target.files[0];
         const reader = new FileReader();
 
@@ -24,7 +24,7 @@ function UploadPhoto() {
         });
     }, []);
 
-    const onSubmitHandler = useCallback(e => {
+    const handleSubmit = useCallback(e => {
         e.preventDefault();
         if(photoSrc === "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png") {
             alert("사진을 선택해주세요.");
@@ -45,14 +45,14 @@ function UploadPhoto() {
 
     return (
         <Container>
-            <form onSubmit={onSubmitHandler}>
+            <form onSubmit={handleSubmit}>
                 <div className="upload-photo-frame">
                     <img style={{height: "100%", width: "100%", objectFit: "cover"}} src={photoSrc} alt=""/>
                 </div>
                 <label htmlFor="uploadPhoto">
                     <div className="btn-upload">선택</div>
                 </label>
-                <input type="file" name="file" id="uploadPhoto" accept="image/*" ref={inputRef} onChange={onUploadPhoto}/>
+                <input type="file" name="file" id="uploadPhoto" accept="image/*" ref={inputRef} onChange={handleChange}/>
                 <button className="btn-confirm" type="submit">확인</button>
             </form>
         </Container>
@@ -79,7 +79,7 @@ const Container = styled.div`
     @media (max-width: 767px) {
         height: 480px;
         width: 400px;
-        font-size: 19px;
+        font-size: 20px;
     }
 
     .upload-photo-frame {
@@ -102,7 +102,7 @@ const Container = styled.div`
             transform: translateX(-50%);
             height: 300px;
             width: 300px;
-            font-size: 19px;
+            font-size: 20px;
         }
     }
 

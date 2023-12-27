@@ -11,20 +11,11 @@ function TextButtonContainer({children}) {
 
 const Container = styled.div`
     display: flex;
-    width: 580px; 
+    width: 90%; 
     flex-direction: row; 
-    justify-content: right;
-    gap: 10px;
-    margin-top: 5px;
-
-    @media (max-width: 1360px) {
-        width: 500px;
-    }
-
-    @media (max-width: 767px) {
-        gap: 5px;
-        width: 320px;
-    }
+    justify-content: center;
+    gap: 40px;
+    padding-top: 5px;
 `;
 
 export default TextButtonContainer;
