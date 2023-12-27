@@ -6,6 +6,7 @@ import axios from "axios";
 import { useInView } from 'react-intersection-observer';
 import FullSizePhotoFrame from "./FullSizePhotoFrame";
 import TextButton from "./TextButton";
+import TextButtonContainer from "./TextButtonContainer";
 
 function RenderPhoto() {
     const [photoList, setPhotoList] = useState([]);
@@ -63,19 +64,10 @@ function RenderPhoto() {
                     <FullSizePhotoFrame>
                         <img id={fullSizePhotoId} src={fullSizePhotoUrl} alt=""></img>
                     </FullSizePhotoFrame>
-                    <div className="text-button-container" style={
-                        {
-                            display: "flex",
-                            width: "580px", 
-                            flexDirection: "row", 
-                            justifyContent: "right", 
-                            gap: "10px",
-                            marginTop: "5px"
-                        }
-                    }>
+                    <TextButtonContainer>
                         <TextButton><span onClick={handleDelete}>삭제</span></TextButton>
                         <TextButton><span onClick={() => handleClick()}>확인</span></TextButton>
-                    </div>
+                    </TextButtonContainer>
                 </FullSizeView>
             }
             <PhotoContainer>
