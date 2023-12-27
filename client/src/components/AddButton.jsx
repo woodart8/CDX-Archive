@@ -15,7 +15,7 @@ const Button = styled.button`
     position: fixed;
     z-index: 1;
     bottom: 70px;
-    right: 5%;
+    right: 50px;
     height: 64px;
     width: 64px;
     background-color: #747AFD;
@@ -28,6 +28,10 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    @media (max-width: 1360px) {
+        right: 40px;
+    }
 
     @media (max-width: 767px) {
         bottom: 80px;
