@@ -20,4 +20,4 @@ Desktop:
 Upload ( O ), Delete ( O )
 
 Mobile:
-Upload ( O ), Delete ( X ) //Axios Network Error 원인을 모르겠음.
+Upload ( O ), Delete ( O )
