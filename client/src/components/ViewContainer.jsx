@@ -19,13 +19,14 @@ const Container = styled.div`
     background-color: #fff;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     @media (max-width: 1360px) {
         width: calc(100% - 73px);
     }
 
     @media (max-width: 767px) {
-        width: 100vw;
+        width: 100%;
     }
 `;
 

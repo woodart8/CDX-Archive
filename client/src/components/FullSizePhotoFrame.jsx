@@ -18,11 +18,11 @@ const Frame = styled.div`
     align-iterms: center;
 
     @media (max-width: 1360px) {
-        width: 520px;
+        width: 500px;
     }
 
     @media (max-width: 767px) {
-        width: 420px;
+        width: 320px;
     }
 
     img {

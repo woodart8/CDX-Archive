@@ -27,7 +27,7 @@ const View = styled.div`
 
     @media (max-width: 767px) {
         height: calc(100% - 51px);
-        width: 100vw;
+        width: 100%;
     }
 `;
 

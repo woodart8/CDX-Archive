@@ -18,11 +18,12 @@ const Container = styled.div`
     margin-top: 5px;
 
     @media (max-width: 1360px) {
-        width: 520px;
+        width: 500px;
     }
 
     @media (max-width: 767px) {
-        width: 420px;
+        gap: 5px;
+        width: 320px;
     }
 `;
 

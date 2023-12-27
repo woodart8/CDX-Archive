@@ -19,7 +19,7 @@ const Container = styled.div`
     }
 
     @media (max-width: 767px) {
-        width: 100vw;
+        width: 100%;
     }
 `;
 
