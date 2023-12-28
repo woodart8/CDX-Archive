@@ -9,7 +9,6 @@ function TopMenu({ handleOrderChange }) {
     const initialRequest = useCallback(async () => {
         await axios.get('http://43.202.52.215:5000/gallery?pageNo=1&pageSize=12&isDesc=true')
         .then((res) => {
-            console.log(res.data);
             setTotal(res.data.total);
         })
         .catch((err) => {console.log(err)});
