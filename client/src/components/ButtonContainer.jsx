@@ -15,7 +15,7 @@ const Container = styled.div`
     flex-direction: row; 
     justify-content: center;
     gap: 40px;
-    padding-top: 5px;
+    padding-top: 10px;
 `;
 
 export default TextButtonContainer;

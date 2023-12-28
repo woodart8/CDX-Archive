@@ -18,6 +18,8 @@ app.get("/gallery", async(req, res) => {
     try{
         let pageSize = req.query.pageSize;
         let pageNo = req.query.pageNo;
+        let isDesc = JSON.parse(req.query.isDesc);
+        let list;
 
         if(pageSize == undefined || typeof pageSize == "undefined" || pageSize == null){
             pageSize = 16;
@@ -31,9 +33,16 @@ app.get("/gallery", async(req, res) => {
         }
 
         const total = await Photo.countDocuments();
-        const list = await Photo.find()
+
+        if(isDesc === true) {
+            list = await Photo.find().sort({"_id":-1})
             .skip(pageSize * (pageNo - 1))
             .limit(pageSize);
+        } else {
+            list = await Photo.find()
+                .skip(pageSize * (pageNo - 1))
+                .limit(pageSize);
+        }
         return res.status(200).send({total, list})
     } catch(err){
         return res.status(500).send({ err : err.message });

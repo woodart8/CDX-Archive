@@ -5,8 +5,9 @@ import FullSizeViewModal from "./FullSizeViewModal";
 import axios from "axios";
 import { useInView } from 'react-intersection-observer';
 import FullSizePhotoFrame from "./FullSizePhotoFrame";
-import TextButton from "./TextButton";
-import TextButtonContainer from "./TextButtonContainer";
+import Button from "./Button";
+import ButtonContainer from "./ButtonContainer";
+import TopMenu from "./TopMenu";
 
 function RenderPhoto() {
     const [photoList, setPhotoList] = useState([]);
@@ -15,12 +16,13 @@ function RenderPhoto() {
     const [visible, setVisible] = useState(false);
     const [fullSizePhotoId, setFullSizePhotoId] = useState("");
     const [fullSizePhotoUrl, setFullSizePhotoUrl] = useState("");
+    const [isDesc, setIsDesc] = useState(true);
     const [ref, inView] = useInView({
         threshold: 0
     });
 
-    const photoFetch = useCallback(async () => {
-        await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12`)
+    const photoFetchAsc = useCallback(async () => {
+        await axios.get(`http://localhost:5000/gallery?pageNo=${page}&pageSize=12&isDesc=false`)
         .then((res) => {
             setPhotoList([...photoList, ...res.data.list]);
             setPage((page) => page + 1);
@@ -29,14 +31,28 @@ function RenderPhoto() {
         .catch((err) => {console.log(err)});
     }, [page, photoList]);
 
+    const photoFetchDesc = useCallback(async () => {
+        await axios.get(`http://localhost:5000/gallery?pageNo=${page}&pageSize=12&isDesc=true`)
+        .then((res) => {
+            setPhotoList([...photoList, ...res.data.list]);
+            setPage((page) => page + 1);
+            setTotal(res.data.total);
+        })
+        .catch((err) => {console.log(err)});
+    }, [page, photoList]);
+    
     useEffect(() => {
-        photoFetch();
+        photoFetchDesc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
     useEffect(() => {
-        if(inView && photoList.length !== total) photoFetch();
+        if(inView && photoList.length !== total) {
+            if(isDesc)
+                photoFetchDesc();
+            else
+                photoFetchAsc();
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inView]);
 
@@ -46,8 +62,13 @@ function RenderPhoto() {
         fullSizePhotoUrl === "" ? setFullSizePhotoUrl(e.photoUrl) : setFullSizePhotoUrl("");
     }
 
+    const handleOrder = () => {
+        setIsDesc(!isDesc);
+        setPhotoList(photoList.reverse());
+    }
+
     const handleDelete = () => {
-        axios.delete(`http://43.202.52.215:5000/delete/${fullSizePhotoId}`)
+        axios.delete(`http://localhost:5000/delete/${fullSizePhotoId}`)
         .then(res => {
             console.log(res);
         }).catch(err => {
@@ -61,15 +82,35 @@ function RenderPhoto() {
             {
                 visible && 
                 <FullSizeViewModal>
-                    <FullSizePhotoFrame>
-                        <img id={fullSizePhotoId} src={fullSizePhotoUrl} alt="" style={{height: '100%', width: '100%', objectFit: 'contain'}}></img>
-                    </FullSizePhotoFrame>
-                    <TextButtonContainer>
-                        <TextButton><span onClick={handleDelete}>삭제</span></TextButton>
-                        <TextButton><span onClick={() => handleClick()}>확인</span></TextButton>
-                    </TextButtonContainer>
+                    <div style={{display: 'flex', flexDirection: 'column', height: '100%', width: '100%', justifyContent: 'center', alignItems: 'center'}} onClick={() => handleClick()}>
+                        <FullSizePhotoFrame>
+                            <img id={fullSizePhotoId} src={fullSizePhotoUrl} alt="" style={{height: '100%', width: '100%', objectFit: 'contain'}}></img>
+                        </FullSizePhotoFrame>
+                        <ButtonContainer>
+                            <Button><i className="fa-solid fa-trash" onClick={handleDelete}></i></Button>
+                        </ButtonContainer>
+                    </div>
                 </FullSizeViewModal>
             }
+            <TopMenu>
+                <div className="total" style={{display: 'flex', height: '50px', lineHeight: '50px'}}>
+                    <span>전체: {total}개</span>
+                </div>
+                <div className="order-select" style={{display: 'flex', height: '50px', lineHeight: '50px', cursor: 'pointer'}} onClick={handleOrder}>
+                    {
+                        isDesc ?
+                        <div> 
+                            <span>최신순 </span>
+                            <i className="fa-solid fa-sort-up"></i>
+                        </div>
+                        : 
+                        <div>
+                            <span>오래된 순 </span>
+                            <i className="fa-solid fa-sort-down"></i>
+                        </div>
+                    }
+                </div>
+            </TopMenu>
             <PhotoContainer>
                 {
                     Array.isArray(photoList) && photoList.map((photo,idx) => {

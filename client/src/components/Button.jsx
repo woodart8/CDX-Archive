@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-function TextButton({children}) {
+function Button({children}) {
     return (
-        <Button>{children}</Button>
+        <Btn>{children}</Btn>
     );
 }
 
-const Button = styled.button`
+const Btn = styled.button`
     display: flex;
     z-index: 3;
     background-color: transparent;
     color: #ffffff;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     border: none;
     justify-content: center;
@@ -20,8 +20,8 @@ const Button = styled.button`
     cursor: pointer;
 
     @media (max-width: 767px) {
-        font-size: 20px;
+        font-size: 28px;
     }
 `;
 
-export default TextButton;
+export default Button;
