@@ -32,7 +32,7 @@ function UploadPhoto() {
         }
         const formData = new FormData();
         formData.append("file", e.target.file.files[0]);
-        axios.post("http://localhost:5000/upload", formData, {
+        axios.post("http://43.202.52.215:5000/upload", formData, {
             headers: { "Content-Type" : "multipart/form-data" },
         }).then(response => {
             console.log(response);

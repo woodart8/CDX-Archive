@@ -22,7 +22,7 @@ function RenderPhoto() {
     });
 
     const photoFetchAsc = useCallback(async () => {
-        await axios.get(`http://localhost:5000/gallery?pageNo=${page}&pageSize=12&isDesc=false`)
+        await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12&isDesc=false`)
         .then((res) => {
             setPhotoList([...photoList, ...res.data.list]);
             setPage((page) => page + 1);
@@ -32,7 +32,7 @@ function RenderPhoto() {
     }, [page, photoList]);
 
     const photoFetchDesc = useCallback(async () => {
-        await axios.get(`http://localhost:5000/gallery?pageNo=${page}&pageSize=12&isDesc=true`)
+        await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12&isDesc=true`)
         .then((res) => {
             setPhotoList([...photoList, ...res.data.list]);
             setPage((page) => page + 1);
@@ -68,7 +68,7 @@ function RenderPhoto() {
     }
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:5000/delete/${fullSizePhotoId}`)
+        axios.delete(`http://43.202.52.215:5000/delete/${fullSizePhotoId}`)
         .then(res => {
             console.log(res);
         }).catch(err => {
