@@ -23,7 +23,7 @@ const Modal = styled.div`
     display: flex;
     position: fixed;
     right: 0;
-    height: 100%;
+    height: calc(100% - 51px);
     width: calc(100% - 336px);
     z-index: 2;
     justify-content: center;
@@ -34,7 +34,7 @@ const Modal = styled.div`
     }
 
     @media (max-width: 767px) {
-        height: calc(100% - 51px);
+        height: calc(100% - 102px);
         width: 100%;
     }
 `;

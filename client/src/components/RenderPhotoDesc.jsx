@@ -7,29 +7,17 @@ import { useInView } from 'react-intersection-observer';
 import FullSizePhotoFrame from "./FullSizePhotoFrame";
 import Button from "./Button";
 import ButtonContainer from "./ButtonContainer";
-import TopMenu from "./TopMenu";
 
-function RenderPhoto() {
+function RenderPhotoDesc() {
     const [photoList, setPhotoList] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
     const [visible, setVisible] = useState(false);
     const [fullSizePhotoId, setFullSizePhotoId] = useState("");
     const [fullSizePhotoUrl, setFullSizePhotoUrl] = useState("");
-    const [isDesc, setIsDesc] = useState(true);
     const [ref, inView] = useInView({
         threshold: 0
     });
-
-    const photoFetchAsc = useCallback(async () => {
-        await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12&isDesc=false`)
-        .then((res) => {
-            setPhotoList([...photoList, ...res.data.list]);
-            setPage((page) => page + 1);
-            setTotal(res.data.total);
-        })
-        .catch((err) => {console.log(err)});
-    }, [page, photoList]);
 
     const photoFetchDesc = useCallback(async () => {
         await axios.get(`http://43.202.52.215:5000/gallery?pageNo=${page}&pageSize=12&isDesc=true`)
@@ -48,10 +36,7 @@ function RenderPhoto() {
 
     useEffect(() => {
         if(inView && photoList.length !== total) {
-            if(isDesc)
-                photoFetchDesc();
-            else
-                photoFetchAsc();
+            photoFetchDesc();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inView]);
@@ -60,11 +45,6 @@ function RenderPhoto() {
         setVisible(!visible);
         fullSizePhotoId === "" ? setFullSizePhotoId(e._id) : setFullSizePhotoId("");
         fullSizePhotoUrl === "" ? setFullSizePhotoUrl(e.photoUrl) : setFullSizePhotoUrl("");
-    }
-
-    const handleOrder = () => {
-        setIsDesc(!isDesc);
-        setPhotoList(photoList.reverse());
     }
 
     const handleDelete = () => {
@@ -92,25 +72,6 @@ function RenderPhoto() {
                     </div>
                 </FullSizeViewModal>
             }
-            <TopMenu>
-                <div className="total" style={{display: 'flex', height: '50px', lineHeight: '50px'}}>
-                    <span>전체: {total}개</span>
-                </div>
-                <div className="order-select" style={{display: 'flex', height: '50px', lineHeight: '50px', cursor: 'pointer'}} onClick={handleOrder}>
-                    {
-                        isDesc ?
-                        <div> 
-                            <span>최신순 </span>
-                            <i className="fa-solid fa-sort-up"></i>
-                        </div>
-                        : 
-                        <div>
-                            <span>오래된 순 </span>
-                            <i className="fa-solid fa-sort-down"></i>
-                        </div>
-                    }
-                </div>
-            </TopMenu>
             <PhotoContainer>
                 {
                     Array.isArray(photoList) && photoList.map((photo,idx) => {
@@ -131,4 +92,4 @@ function RenderPhoto() {
     );
 }
 
-export default RenderPhoto;
+export default RenderPhotoDesc;

@@ -36,7 +36,7 @@ function UploadPhoto() {
             headers: { "Content-Type" : "multipart/form-data" },
         }).then(response => {
             console.log(response);
-            setTimeout(()=>{window.location.href = '/gallery';},500);
+            setTimeout(()=>{window.location.href = '/gallery';}, 0);
         }).catch(err => {
             console.log(err.response);
         });

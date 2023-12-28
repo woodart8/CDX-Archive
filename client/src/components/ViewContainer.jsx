@@ -12,6 +12,7 @@ function ViewContainer({children}) {
 const Container = styled.div`
     display: flex;
     position: absolute;
+    flex-direction: column;
     top: 0;
     right: 0;
     height: auto;
