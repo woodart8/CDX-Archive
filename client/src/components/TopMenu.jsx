@@ -20,6 +20,7 @@ function TopMenu({ handleOrderChange }) {
 
     useEffect(() => {
         initialRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     useEffect(() => {
@@ -52,23 +53,25 @@ function TopMenu({ handleOrderChange }) {
 
 const Menu = styled.div`
     display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
     flex-direction: row;
     height: 50px; 
-    width: 90%; 
+    width: calc(90% - 336px);
+    background-color: #fff;
     padding: 0 5% 0 5%;
     font-size: 17px;
     justify-content: space-between;
     border-bottom: 1px solid #e1e1e1;
 
-    @media (max-width: 1680px) {
-
-    }
-
-    @media (max-width: 1080px) {
-
+    @media (max-width: 1360px) {
+        width: calc(90% - 73px);
     }
 
     @media (max-width: 767px) {
+        width: 90%;
         font-size: 16px;
     }
 

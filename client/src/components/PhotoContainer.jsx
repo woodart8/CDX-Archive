@@ -12,7 +12,7 @@ function PhotoContainer({children}) {
 const Container = styled.div`
     display: grid;
     gap: 30px;
-    padding: 20px 50px 50px 50px;
+    padding: 71px 50px 50px 50px;
     grid-template-columns: repeat(4,1fr);
 
     @media (max-width: 1680px) {
