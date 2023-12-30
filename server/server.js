@@ -49,12 +49,15 @@ app.get("/gallery", async(req, res) => {
     }
 })
 
-app.post("/upload", upload.single('file'), async(req, res) => {
+app.post("/upload", upload.array('images'), async(req, res) => {
     try{
-        const photo = new Photo({
-            photoUrl : req.file.location,
-        });
-        await photo.save();
+        let photo;
+        req.files.forEach((element) => {
+            photo = new Photo({
+                photoUrl : element.location,
+            })
+            photo.save();
+        })
         return res.status(200).send("Upload Success");
     } catch(err){
         return res.status(500).send({ err : err.message });

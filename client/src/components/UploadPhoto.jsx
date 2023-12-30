@@ -30,8 +30,11 @@ function UploadPhoto() {
             alert("사진을 선택해주세요.");
             return;
         }
+        const uploadFiles = Array.from(e.target.images.files);
         const formData = new FormData();
-        formData.append("file", e.target.file.files[0]);
+        uploadFiles.forEach((element) => {
+            formData.append("images", element);
+        });
         axios.post("http://43.202.52.215:5000/upload", formData, {
             headers: { "Content-Type" : "multipart/form-data" },
         }).then(response => {
@@ -39,6 +42,7 @@ function UploadPhoto() {
             setTimeout(()=>{window.location.href = '/gallery';}, 0);
         }).catch(err => {
             console.log(err.response);
+            alert("사진의 크기가 10MB 보다 크거나 유효하지 않은 확장자입니다.");
         });
 
     }, [photoSrc]);
@@ -52,7 +56,7 @@ function UploadPhoto() {
                 <label htmlFor="uploadPhoto">
                     <div className="btn-upload">선택</div>
                 </label>
-                <input type="file" name="file" id="uploadPhoto" accept="image/*" ref={inputRef} onChange={handleChange}/>
+                <input type="file" name="images" id="uploadPhoto" accept="image/*" multiple ref={inputRef} onChange={handleChange}/>
                 <button className="btn-confirm" type="submit">확인</button>
             </form>
         </Container>
