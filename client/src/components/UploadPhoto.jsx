@@ -42,7 +42,7 @@ function UploadPhoto() {
             setTimeout(()=>{window.location.href = '/gallery';}, 0);
         }).catch(err => {
             console.log(err.response);
-            alert("사진의 크기가 10MB 보다 크거나 유효하지 않은 확장자입니다.");
+            alert("선택된 사진의 총 크기가 50MB 보다 크거나 유효하지 않은 확장자입니다.");
         });
 
     }, [photoSrc]);
