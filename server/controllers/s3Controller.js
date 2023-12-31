@@ -20,6 +20,7 @@ const storage = multerS3({
         bucket: `${process.env.S3_BUCKET_NAME}`,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         key: (req, file, callback) => {
+            file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8');
             const extension = path.extname(file.originalname);
             if(!allowedExtensions.includes(extension)) {
                 return callback(new Error('wrong extension'));

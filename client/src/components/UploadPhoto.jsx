@@ -47,6 +47,7 @@ function UploadPhoto() {
             setIsLoading(false);
             console.log(err.response);
             alert("선택된 사진의 총 크기가 50MB 보다 크거나 유효하지 않은 확장자입니다.");
+            window.location.reload();
         });
 
     }, [photoSrc]);
@@ -56,8 +57,8 @@ function UploadPhoto() {
             {
                isLoading && 
                 <Loading>
-                    <div class="loading-container">
-                        <div class="loading"></div>
+                    <div className="loading-container">
+                        <div className="loading"></div>
                         <div id="loading-text">loading</div>
                     </div>
                 </Loading> 

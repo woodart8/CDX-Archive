@@ -68,7 +68,7 @@ app.delete('/delete/:id', async(req, res) => {
     const id = new ObjectId(req.params.id);
     const photo = await Photo.findById(id);
     const url = photo.photoUrl.split('/');
-    const keyName = url[url.length - 1];
+    const keyName = decodeURI(url[url.length - 1]);
     try{
         Photo.findByIdAndDelete(id)
         .then(data => {
