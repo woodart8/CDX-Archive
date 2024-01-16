@@ -11,7 +11,7 @@ import ButtonContainer from "./ButtonContainer";
 function RenderPhotoDesc() {
     const [photoList, setPhotoList] = useState([]);
     const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(0);
+    const [isEnd, setIsEnd] = useState(false);
     const [visible, setVisible] = useState(false);
     const [fullSizePhotoId, setFullSizePhotoId] = useState("");
     const [fullSizePhotoUrl, setFullSizePhotoUrl] = useState("");
@@ -24,7 +24,7 @@ function RenderPhotoDesc() {
         .then((res) => {
             setPhotoList([...photoList, ...res.data.list]);
             setPage((page) => page + 1);
-            setTotal(res.data.total);
+            setIsEnd(res.data.isEnd);
         })
         .catch((err) => {console.log(err)});
     }, [page, photoList]);
@@ -35,7 +35,7 @@ function RenderPhotoDesc() {
     }, []);
 
     useEffect(() => {
-        if(inView && photoList.length !== total) {
+        if(inView && !isEnd) {
             photoFetchDesc();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

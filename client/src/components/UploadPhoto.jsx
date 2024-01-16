@@ -42,7 +42,9 @@ function UploadPhoto() {
         }).then(response => {
             setIsLoading(false);
             console.log(response);
-            window.location.href = '/gallery';
+            setTimeout(() => {
+              window.location.href = '/gallery';
+            }, 0);
         }).catch(err => {
             setIsLoading(false);
             console.log(err.response);

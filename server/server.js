@@ -20,6 +20,8 @@ app.get("/gallery", async(req, res) => {
         let pageNo = req.query.pageNo;
         let isDesc = JSON.parse(req.query.isDesc);
         let list;
+        let edge;
+        let isEnd = false;
 
         if(pageSize == undefined || typeof pageSize == "undefined" || pageSize == null){
             pageSize = 16;
@@ -38,12 +40,16 @@ app.get("/gallery", async(req, res) => {
             list = await Photo.find().sort({"_id":-1})
             .skip(pageSize * (pageNo - 1))
             .limit(pageSize);
+            edge = await Photo.find().limit(1);
+            if(list[list.length - 1].photoUrl === edge[0].photoUrl) isEnd = true;
         } else {
             list = await Photo.find()
                 .skip(pageSize * (pageNo - 1))
                 .limit(pageSize);
+            edge = await Photo.find().sort({"_id":-1}).limit(1);
+            if(list[list.length - 1].photoUrl === edge[0].photoUrl) isEnd = true;
         }
-        return res.status(200).send({total, list})
+        return res.status(200).send({total, list, isEnd});
     } catch(err){
         return res.status(500).send({ err : err.message });
     }
