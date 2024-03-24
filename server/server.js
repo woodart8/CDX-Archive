@@ -6,6 +6,7 @@ const { mongoDB } = require('./db');
 const { upload, deletePhoto } = require('./controllers/s3Controller');
 const Photo = require('./models/photoModel');
 const ObjectId = require('mongodb').ObjectId;
+let isDisableKeepAlive = false;
 
 mongoDB();
 dotenv.config();
@@ -13,6 +14,13 @@ dotenv.config();
 app.use(cors());
 
 app.use(express.json());
+
+app.use(function(req, res, next) {
+    if(isDisableKeepAlive) {
+        res.set('Connection', 'close');
+    }
+    next();
+})
 
 app.get("/gallery", async(req, res) => {
     try{
@@ -101,5 +109,14 @@ app.delete('/delete/:id', async(req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
+    process.send('ready');
     console.log(`server is on ${process.env.PORT}`);
 });
+
+process.on('SIGINT', function() {
+    isDisableKeepAlive = true;
+    app.close(function () {
+        console.log('server closed');
+        process.exit(0);
+    })
+})
