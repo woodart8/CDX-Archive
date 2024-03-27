@@ -22,7 +22,7 @@ function UploadPhoto() {
       )
     }
 
-    const {acceptedFiles, fileRejections, getRootProps, getInputProps} = useDropzone({onDrop, accept: {"image/*": [".jpeg", ".jpg", ".png"]}, maxFiles:10, maxSize:10 * 1024 * 1024 * 5});
+    const {acceptedFiles, fileRejections, getRootProps, getInputProps} = useDropzone({onDrop, accept: {"image/*": [".jpeg", ".jpg", ".png"]}, maxFiles:6, maxSize:10 * 1024 * 1024 * 5});
     
     const thumbs = acceptedFiles.map(file => (
       <Thumb key={file.name}>
@@ -75,17 +75,19 @@ function UploadPhoto() {
                     </div>
                 </Loading> 
             }
-            <section className="form-container" >
-              <div {...getRootProps({className: 'dropzone'})}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-                </svg>
-                <input {...getInputProps()} type="file" name="images" id="uploadPhoto" accept="image/*" multiple ref={inputRef}/>
-                <p>Drag & drop or click to select files</p>
-              </div>
+            <section className="form-container">
+              <label htmlFor="uploadPhoto">
+                <div {...getRootProps({className: 'dropzone'})}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                  </svg>
+                  <input {...getInputProps()} type="file" name="images" id="uploadPhoto" accept="image/*" multiple ref={inputRef}/>
+                  <p>Drag & drop or click to select files</p>
+                </div>
+              </label>
             </section>
         </DragNDropContainer>
-        { fileRejectionItems.length > 0 && <span style={{color: "red"}}>'10 files(50MB)' are the maximum number of 'Images' you can drop here</span>}
+        { fileRejectionItems.length > 0 && <span style={{color: "red"}}>'6 files(50MB)' are the maximum number of 'Images' you can drop here</span>}
         {thumbs.length > 0 && <React.Fragment>
           <ThumbsContainer>{thumbs}</ThumbsContainer>
           <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
@@ -96,6 +98,9 @@ function UploadPhoto() {
 
 const DragNDropContainer = styled.div`
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 480px;
     width: 640px;
     background-color: #fff;
@@ -104,7 +109,6 @@ const DragNDropContainer = styled.div`
     border-radius: 25px;
     font-size: 22px;
     font-weight: bold;
-    cursor: pointer;
 
     @media (max-width: 767px) {
         height: 320px;
@@ -122,10 +126,17 @@ const DragNDropContainer = styled.div`
       .dropzone {
         display: flex;
         flex-direction: column;
-        height: 100%;
-        width: 100%;
+        height: 480px;
+        width: 640px;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+
+        @media (max-width: 767px) {
+          height: 320px;
+          width: 400px;
+          font-size: 20px;
+        }
 
         svg {
           height: 80px;
