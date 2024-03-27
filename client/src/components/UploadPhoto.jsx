@@ -104,6 +104,7 @@ const DragNDropContainer = styled.div`
     border-radius: 25px;
     font-size: 22px;
     font-weight: bold;
+    cursor: pointer;
 
     @media (max-width: 767px) {
         height: 320px;
