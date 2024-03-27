@@ -14,7 +14,7 @@ const Button = styled.button`
     display: flex;
     position: fixed;
     z-index: 1;
-    bottom: 70px;
+    bottom: 80px;
     right: 50px;
     height: 64px;
     width: 64px;
@@ -34,7 +34,7 @@ const Button = styled.button`
     }
 
     @media (max-width: 767px) {
-        bottom: 80px;
+        bottom: 100px;
         right: 25px;
     }
 `;

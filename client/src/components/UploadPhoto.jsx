@@ -1,40 +1,50 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import styled from "styled-components";
 
 function UploadPhoto() {
-    const [photoSrc, setPhotoSrc] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    const [files, setFiles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const inputRef = useRef(null);
 
-    const handleChange = useCallback(async e => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
+    useEffect(() => 
+      { return () => {files.forEach(file => URL.revokeObjectURL(file.preview));} },
+    [files]);
 
-        try {
-          reader.readAsDataURL(file);
-        } catch (error) {
-            console.log(error);
-        }
+    const onDrop = (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map(file => {
+          return Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        })
+      )
+    }
 
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                setPhotoSrc(reader.result || null);
-                resolve();
-            };
-        });
-    }, []);
+    const {acceptedFiles, fileRejections, getRootProps, getInputProps} = useDropzone({onDrop, accept: {"image/*": [".jpeg", ".jpg", ".png"]}, maxFiles:10, maxSize:10 * 1024 * 1024 * 5});
+    
+    const thumbs = acceptedFiles.map(file => (
+      <Thumb key={file.name}>
+        <Image src={file.preview} alt=""/>
+      </Thumb>
+    ));
 
-    const handleSubmit = useCallback(e => {
-        e.preventDefault();
-        if(photoSrc === "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png") {
-            alert("사진을 선택해주세요.");
-            return;
-        }
+    const fileRejectionItems = fileRejections.map(({ file, errors }) => { 
+      return (
+        <li key={file.path}>
+             {file.path} - {file.size} bytes
+             <ul>
+               {errors.map(e => <li key={e.code}>{e.message}</li>)}
+            </ul>
+        </li>
+      ) 
+     });
+
+    const handleSubmit = () => {
         setIsLoading(true);
-        const uploadFiles = Array.from(e.target.images.files);
         const formData = new FormData();
-        uploadFiles.forEach((element) => {
+        acceptedFiles.forEach((element) => {
             formData.append("images", element);
         });
         axios.post("http://43.202.52.215:5000/upload", formData, {
@@ -51,11 +61,11 @@ function UploadPhoto() {
             alert("선택된 사진의 총 크기가 50MB 보다 크거나 유효하지 않은 확장자입니다.");
             window.location.reload();
         });
-
-    }, [photoSrc]);
+    };
 
     return (
-        <Container>
+      <div>
+        <DragNDropContainer>
             {
                isLoading && 
                 <Loading>
@@ -65,25 +75,29 @@ function UploadPhoto() {
                     </div>
                 </Loading> 
             }
-            <form onSubmit={handleSubmit}>
-                <div className="upload-photo-thumbnail">
-                    <img style={{height: "100%", width: "100%", objectFit: "cover"}} src={photoSrc} alt=""/>
-                </div>
-                <label htmlFor="uploadPhoto">
-                    <div className="btn-upload">선택</div>
-                </label>
-                <input type="file" name="images" id="uploadPhoto" accept="image/*" multiple ref={inputRef} onChange={handleChange}/>
-                <button className="btn-confirm" type="submit">확인</button>
-            </form>
-        </Container>
+            <section className="form-container" >
+              <div {...getRootProps({className: 'dropzone'})}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
+                </svg>
+                <input {...getInputProps()} type="file" name="images" id="uploadPhoto" accept="image/*" multiple ref={inputRef}/>
+                <p>Drag & drop or click to select files</p>
+              </div>
+            </section>
+        </DragNDropContainer>
+        { fileRejectionItems.length > 0 && <span style={{color: "red"}}>'10 files(50MB)' are the maximum number of 'Images' you can drop here</span>}
+        {thumbs.length > 0 && <React.Fragment>
+          <ThumbsContainer>{thumbs}</ThumbsContainer>
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        </React.Fragment>}
+      </div>
     );
 }
 
-const Container = styled.div`
+const DragNDropContainer = styled.div`
     display: flex;
-    position: relative;
-    height: 600px;
-    width: 800px;
+    height: 480px;
+    width: 640px;
     background-color: #fff;
     color: #000;
     border: none;
@@ -91,68 +105,84 @@ const Container = styled.div`
     font-size: 22px;
     font-weight: bold;
 
-    @media (max-width: 1360px) {
-        height: 480px;
-        width: 640px;
-    }
-
     @media (max-width: 767px) {
-        height: 480px;
+        height: 320px;
         width: 400px;
         font-size: 20px;
     }
 
-    .upload-photo-thumbnail {
-        position: absolute;
-        left: 50px;
-        top: 50px;
-        height: 500px;
-        width: 500px;
-        overflow: hidden;
-        border-radius: 10px;
+    .form-container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
 
-        @media (max-width: 1360px) {
-            height: 375px;
-            width: 375px;
+      .dropzone {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          height: 80px;
+          width: 80px;
         }
+
+        p {
+          font-size: 21px;
     
-        @media (max-width: 767px) {
-            top: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 300px;
-            width: 300px;
-            font-size: 20px;
+          @media (max-width: 767px) {
+            font-size: 18px;
+          }
         }
+      }
     }
+`;
 
-    .btn-upload {
-        position: absolute;
-        bottom: 30px;
-        right: 100px;
-        cursor: pointer;
-    }
+const ThumbsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 16px;
+`;
 
-    .btn-confirm {
-        position: absolute;
-        bottom: 30px;
-        right: 35px;
-        border: none;
-        background-color: transparent;
-        color: #000;
-        margin: 0;
-        padding: 0;
-        font-size: 22px;
-        font-weight: bold;
-        cursor: pointer; 
+const Thumb = styled.div`
+  display: flex;
+  border-radius: 2px;
+  border: 1px solid #eaeaea;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  width: 100px;
+  height: 100px;
+  padding: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+`;
 
-        @media (max-width: 767px) {
-            font-size: 19px;
-        }
-    }
+const Image = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
-    #uploadPhoto {
-        display: none;
+const SubmitButton = styled.button`
+    display: block;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #747AFD;
+    color: #ffffff;
+    height: 30px;
+    width: 100px;
+    font-weight: medium;
+    
+    &:hover {
+      background-color: #646AFD;
+      transition: 0.2s ease;
     }
 `;
 
