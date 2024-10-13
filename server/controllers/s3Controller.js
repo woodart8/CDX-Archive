@@ -12,7 +12,7 @@ const s3Client = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-const allowedExtensions = ['.png', '.jpg', '.jpeg']
+const allowedExtensions = ['.png', '.jpg', '.jpeg', '.svg']
 
 const storage = multerS3({
         s3: s3Client,
