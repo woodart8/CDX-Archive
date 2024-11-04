@@ -1,6 +1,7 @@
 # CDX ARCHIVE(친구들과의 추억 저장소)
 
 **사이트**: [CDX Archive](http://cdxarchive.com.s3-website.ap-northeast-2.amazonaws.com)
+배포 중단(AWS 프리 티어 종료)
 
 **개발 기간** : 23.11.28 ~
 
